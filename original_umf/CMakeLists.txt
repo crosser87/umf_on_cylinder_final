@@ -9,8 +9,10 @@
 
 cmake_minimum_required(VERSION 2.6)
 
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/cmake/modules)
+
 if (CMAKE_COMPILER_IS_GNUCXX)
-  set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -ggdb -I. -std=c++0x -lm")
+  set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -ggdb -I. -std=c++11 -lm")
 endif ()
 
 find_package(OpenCV REQUIRED)

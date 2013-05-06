@@ -1,4 +1,4 @@
-#-------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 Projekt: Detektor UMF na válci 
 Soubor: CMakeLists.txt
 Kódování: UTF-8
@@ -7,13 +7,68 @@ Autor: Radim Kříž (xkrizr03@stud.fit.vutbr.cz)
 Popis: soubor README s intrukcemi pro překlad a spuštění testovacího programu
 --------------------------------------------------------------------------------
 
-Prerekvizice
+Základní informace o programu
 --------------------------------------------------------------------------------
+Program je napsán v jazyce C++ podle standartu C++11. Platformní nezávislost  
+zajišťuje program CMake, který vygeneruje soubor Makefile. Program také využívá 
+knihovny OpenCV a Eigen2, které jsou nutné pro překlad programu.
 
+Překlad programu byl testován na Linuxové distribuci Arch. Instalace na jiných 
+systémech než UNIX-like nebyla testována, ale program by měl být bez problémů 
+přenosný mezi různými platformami.
 
+V případě problému se obraťte na autora uvedeného v hlavičce souboru.
+
+Poznámka: 
+
+Překlad na studentských serverech eva a merlin není možný. Server 
+eva používá starou verzi překladače gcc nepodporující C++11 a merlin nemá 
+nainstalovánu knihovnu Eigen2.
+
+Potřebný software
+--------------------------------------------------------------------------------
+* Překladač jazyka C++ podporující formát C++11. Nejlépe aktuální verze 
+  překladače gcc. Testována na verzi gcc 4.8.
+* Program CMake pro vygenerování souboru Makefile. Testováno na verzi 
+  CMake 2.8.
+* Knihovna OpenCV. Testováno na verzi OpenCV 2.4.5
+* Knihovna Eigen2. Testováno na verzi Eigen2 2.0.17
 
 Překlad
 --------------------------------------------------------------------------------
+Překlad na UNIX-like systémech se provede následující sekvencí příkazů:
+
+  cd <kořenový adresář projektu> 
+  mkdir build
+  cd build
+  cmake ..
+  make
+
+Na systémech Windows a jiných se postup instalace může lišit podle nastavení 
+prostředí. V případě použití MinGW by měla instalace proběhnout stejným způsobem.
 
 Spuštění
 --------------------------------------------------------------------------------
+Program se po přeložení výše zmíněným postupem nachází ve složce build.
+
+Syntaxe spuštění programu z aktuální složky přes příkazovou řádku:
+
+./umfCylinderDetectorTest [-s] [-w] [-a] [-t (1-9)] -c config_file ..
+  -d directory -o output_file
+
+Jednotlivé parametry mají tento význam:
+
+-s                    zapíná zobrazování výsledků detekce v oknech
+-w                    zapíná zápis výsledných obrazů do souborů
+-t (1-9)              definuje tloušťku čar při kreslení
+-a                    zapíná kompletní debug výstupy (zápis i zobrazení obrazů)
+-c config_file        definuje cestu ke konfiguračnímu souboru
+-d directory          definuje cestu k adresáři s testovacími daty
+-o output_file        soubor s výstupními daty - souřadnice nalezených středů 
+                      polí markeru
+                      
+Příklad spuštění programu ze složky build:
+
+./umfCylinderDetectorTest -s -c ../default_configuration.yml .. 
+  -d ../data/chessboard -o output.txt
+

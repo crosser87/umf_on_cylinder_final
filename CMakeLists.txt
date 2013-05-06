@@ -11,13 +11,15 @@ cmake_minimum_required(VERSION 2.6)
 
 project(umf_cylinder_detector)
 
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/cmake/modules)
+
 add_subdirectory (original_umf)
 add_subdirectory (umf_cylinder_detector)
 
 find_package(OpenCV REQUIRED)
 
 if (CMAKE_COMPILER_IS_GNUCXX)
-  set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x -pedantic -Werror -Wall")
+  set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -pedantic -Werror -Wall")
 endif ()
 
 include_directories (${umf_cylinder_detector_SOURCE_DIR}/umf_cylinder_detector)
